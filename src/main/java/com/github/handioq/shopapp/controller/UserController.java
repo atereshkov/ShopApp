@@ -1,7 +1,7 @@
-package handioq.controller;
+package com.github.handioq.shopapp.controller;
 
-import handioq.model.User;
-import handioq.repository.UserRepository;
+import com.github.handioq.shopapp.repository.UserRepository;
+import com.github.handioq.shopapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

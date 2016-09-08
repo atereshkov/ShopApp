@@ -1,10 +1,12 @@
-package handioq;
+package com.github.handioq.shopapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan("com.github.handioq.shopapp")
 @EnableAutoConfiguration
 public class Application {
 

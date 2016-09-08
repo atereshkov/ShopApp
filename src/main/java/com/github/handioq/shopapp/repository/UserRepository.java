@@ -1,6 +1,6 @@
-package handioq.repository;
+package com.github.handioq.shopapp.repository;
 
-import handioq.model.User;
+import com.github.handioq.shopapp.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 

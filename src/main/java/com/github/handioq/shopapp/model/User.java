@@ -1,4 +1,4 @@
-package handioq.model;
+package com.github.handioq.shopapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
