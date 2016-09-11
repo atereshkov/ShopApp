@@ -1,13 +1,14 @@
 package com.github.handioq.shopapp.controller;
 
-import com.github.handioq.shopapp.repository.UserRepository;
 import com.github.handioq.shopapp.model.User;
 import com.github.handioq.shopapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 //@RestController
@@ -20,16 +21,17 @@ public class UserController {
 
     @RequestMapping("/create")
     @ResponseBody
-    public String create(String email, String name) {
-        String userId = "";
+    public ResponseEntity<?> create(String email, String name, String password) {
+        User user;
+
         try {
-            User user = new User(email, name);
+            user = new User(email, name, password);
             userService.save(user);
-            userId = String.valueOf(user.getId());
         } catch (Exception ex) {
-            return "Error creating the user: " + ex.toString();
+            return new ResponseEntity<>(ex.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return "User successfully created with id = " + userId;
+
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @RequestMapping("/delete")
@@ -61,7 +63,7 @@ public class UserController {
         try {
             User user = userService.findOne(id);
             user.setEmail(email);
-            user.setName(name);
+            user.setUsername(name);
             userService.save(user);
         } catch (Exception ex) {
             return "Error updating the user: " + ex.toString();
