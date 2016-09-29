@@ -29,7 +29,8 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
@@ -41,6 +42,15 @@ public class User {
 
     public User(long id) {
         this.id = id;
+    }
+
+    public User(User user) {
+        super();
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.roles = user.getRoles();
     }
 
     public User(String email, String username, String password, List<Role> roles) {
