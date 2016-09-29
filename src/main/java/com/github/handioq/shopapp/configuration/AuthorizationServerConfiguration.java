@@ -14,6 +14,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableAuthorizationServer
@@ -28,7 +31,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private static final String GRANT_TYPE_PASSWORD = "password";
     private static final String GRANT_TYPE_REFRESH_TOKEN = "refresh_token";
 
-    private TokenStore tokenStore = new InMemoryTokenStore();
+    //private TokenStore tokenStore = new InMemoryTokenStore(); // uncomment this and add clients.inMemory if u want to save tokens in memory
 
     @Autowired
     @Qualifier("authenticationManagerBean")
@@ -37,11 +40,13 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    DataSource dataSource;
+
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints)
-            throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-                .tokenStore(this.tokenStore)
+                .tokenStore(new JdbcTokenStore(dataSource))
                 .authenticationManager(this.authenticationManager)
                 .userDetailsService(userDetailsService);
     }
@@ -49,13 +54,13 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients
-                .inMemory()
-                .withClient(CLIENT)
+                .jdbc(dataSource);
+                /*.withClient(CLIENT) // uncomment this if we want to create new client with name and secret
                 .authorizedGrantTypes(GRANT_TYPE_PASSWORD, GRANT_TYPE_REFRESH_TOKEN)
                 .authorities(AUTHORITY_USER)
                 .scopes(SCOPE_READ, SCOPE_WRITE)
                 .resourceIds(RESOURCE_ID)
-                .secret(SECRET);
+                .secret(SECRET);*/
     }
 
     @Bean
@@ -63,7 +68,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public DefaultTokenServices tokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setSupportRefreshToken(true);
-        tokenServices.setTokenStore(this.tokenStore);
+        tokenServices.setAccessTokenValiditySeconds(40000);
+        tokenServices.setRefreshTokenValiditySeconds(42000);
+        tokenServices.setTokenStore(new JdbcTokenStore(dataSource));
         return tokenServices;
     }
 

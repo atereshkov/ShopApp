@@ -2,10 +2,11 @@ package com.github.handioq.shopapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

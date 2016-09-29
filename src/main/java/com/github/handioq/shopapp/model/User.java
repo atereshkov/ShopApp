@@ -4,11 +4,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
