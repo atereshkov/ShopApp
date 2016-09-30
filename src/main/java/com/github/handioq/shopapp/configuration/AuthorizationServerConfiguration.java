@@ -49,6 +49,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .tokenStore(new JdbcTokenStore(dataSource))
                 .authenticationManager(this.authenticationManager)
                 .userDetailsService(userDetailsService);
+                //.tokenServices(tokenServices());
     }
 
     @Override
@@ -68,8 +69,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public DefaultTokenServices tokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setSupportRefreshToken(true);
-        tokenServices.setAccessTokenValiditySeconds(40000);
-        tokenServices.setRefreshTokenValiditySeconds(42000);
+        tokenServices.setAccessTokenValiditySeconds(10000);
+        tokenServices.setRefreshTokenValiditySeconds(12000);
         tokenServices.setTokenStore(new JdbcTokenStore(dataSource));
         return tokenServices;
     }
