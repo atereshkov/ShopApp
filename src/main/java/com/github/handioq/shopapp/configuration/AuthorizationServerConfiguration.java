@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
@@ -48,8 +49,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         endpoints
                 .tokenStore(new JdbcTokenStore(dataSource))
                 .authenticationManager(this.authenticationManager)
-                .userDetailsService(userDetailsService);
-                //.tokenServices(tokenServices());
+                .userDetailsService(userDetailsService)
+                .tokenServices(tokenServices());
     }
 
     @Override
@@ -66,7 +67,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Bean
     @Primary
-    public DefaultTokenServices tokenServices() {
+    public AuthorizationServerTokenServices tokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setSupportRefreshToken(true);
         tokenServices.setAccessTokenValiditySeconds(10000);
