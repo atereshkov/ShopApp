@@ -1,6 +1,5 @@
 package com.github.handioq.shopapp.service;
 
-import com.github.handioq.shopapp.model.Role;
 import com.github.handioq.shopapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,7 +10,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        com.github.handioq.shopapp.model.User user = userService.findByUsername(name);
+        User user = userService.findByUsername(name);
 
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User %s does not exist!", name));

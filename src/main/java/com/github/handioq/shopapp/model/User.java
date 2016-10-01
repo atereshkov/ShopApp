@@ -42,12 +42,11 @@ public class User implements Serializable {
     }
 
     public User(long id) {
-        this.id = id;
+        super();
     }
 
     public User(User user) {
         super();
-        this.id = user.getId();
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.password = user.getPassword();
@@ -67,20 +66,20 @@ public class User implements Serializable {
         this.password = new BCryptPasswordEncoder().encode(password);
     }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getEmail() {
@@ -123,8 +122,11 @@ public class User implements Serializable {
         User user = (User) o;
 
         if (id != user.id) return false;
+        if (enabled != user.enabled) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        return username != null ? username.equals(user.username) : user.username == null;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        return roles != null ? roles.equals(user.roles) : user.roles == null;
 
     }
 
@@ -133,6 +135,9 @@ public class User implements Serializable {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (enabled ? 1 : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
         return result;
     }
 
@@ -142,6 +147,9 @@ public class User implements Serializable {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", roles=" + roles +
                 '}';
     }
 }
