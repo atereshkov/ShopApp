@@ -2,16 +2,16 @@ package com.github.handioq.shopapp.controller;
 
 import com.github.handioq.shopapp.model.User;
 import com.github.handioq.shopapp.service.UserService;
+import com.github.handioq.shopapp.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-//@RestController
-@RequestMapping("/api/v1")
-@Controller
+@RestController
+@RequestMapping(Constants.API_URL + Constants.URL_USERS)
 public class UserController {
 
     @Autowired
@@ -34,17 +34,18 @@ public class UserController {
 
     @RequestMapping("/delete")
     @ResponseBody
-    public String delete(long id) {
+    public ResponseEntity<?> delete(long id) {
         try {
             User user = new User(id);
             userService.delete(user);
         } catch (Exception ex) {
-            return "Error deleting the user:" + ex.toString();
+            return new ResponseEntity<>(ex.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return "User successfully deleted!";
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping("/get-by-email")
+    @RequestMapping("/")
     @ResponseBody
     public ResponseEntity<?> getByEmail(String email) {
         User user = userService.findByEmail(email);
