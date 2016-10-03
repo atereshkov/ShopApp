@@ -1,4 +1,4 @@
-package com.github.handioq.shopapp.model;
+package com.github.handioq.shopapp.model.entity;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
