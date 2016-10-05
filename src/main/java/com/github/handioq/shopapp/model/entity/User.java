@@ -115,6 +115,17 @@ public class User implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (enabled ? 1 : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -128,17 +139,6 @@ public class User implements Serializable {
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         return roles != null ? roles.equals(user.roles) : user.roles == null;
 
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (enabled ? 1 : 0);
-        result = 31 * result + (roles != null ? roles.hashCode() : 0);
-        return result;
     }
 
     @Override

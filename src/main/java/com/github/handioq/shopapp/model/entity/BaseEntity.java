@@ -3,12 +3,16 @@ package com.github.handioq.shopapp.model.entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
-public abstract class BaseEntity {
+public abstract class BaseEntity implements Serializable { // FIXME: 05-Oct-16 problem with id not found
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    public BaseEntity() {
+    }
 
     public long getId() {
         return id;
@@ -16,12 +20,5 @@ public abstract class BaseEntity {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "BaseEntity{" +
-                "id=" + id +
-                '}';
     }
 }

@@ -12,7 +12,6 @@ CREATE TABLE IF NOT EXISTS roles (
 );
 
 CREATE TABLE IF NOT EXISTS user_roles (
-  id      INT PRIMARY KEY,
   user_id INT,
   role_id INT
 );
