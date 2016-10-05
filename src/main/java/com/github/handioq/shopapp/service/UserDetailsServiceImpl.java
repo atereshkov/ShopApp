@@ -30,19 +30,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException(String.format("User %s does not exist!", name));
         }
 
-        //return new org.springframework.security.core.userdetails.User(user.getUsername(),
-        //        user.getPassword(), getUserRoles(user.getRoles()));
         return new UserRepositoryUserDetails(user);
     }
 
-    /*private List<SimpleGrantedAuthority> getUserRoles(List<Role> userRoles) {
-        Set<SimpleGrantedAuthority> grantedAuthorities = new HashSet<>();
-        grantedAuthorities.addAll(userRoles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList()));
-
-        return new ArrayList<>(grantedAuthorities);
-    }*/
-
-    // User here refers to my application's domain User object, not Spring Security
     private final static class UserRepositoryUserDetails extends User implements UserDetails {
 
         private static final long serialVersionUID = 1L;

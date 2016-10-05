@@ -60,10 +60,11 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public User(String email, String username, String password) {
+    public User(String email, String username, String password, boolean enabled) {
         this.email = email;
         this.username = username;
         this.password = new BCryptPasswordEncoder().encode(password);
+        this.enabled = enabled;
     }
 
     public long getId() {
