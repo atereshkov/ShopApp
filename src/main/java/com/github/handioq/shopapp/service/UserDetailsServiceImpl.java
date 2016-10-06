@@ -1,6 +1,7 @@
 package com.github.handioq.shopapp.service;
 
 import com.github.handioq.shopapp.model.entity.User;
+import com.github.handioq.shopapp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -5,6 +5,8 @@ import com.github.handioq.shopapp.model.entity.Role;
 import com.github.handioq.shopapp.model.entity.User;
 import com.github.handioq.shopapp.service.AuthService;
 import com.github.handioq.shopapp.service.RoleService;
+import com.github.handioq.shopapp.service.impl.AuthServiceImpl;
+import com.github.handioq.shopapp.service.impl.RoleServiceImpl;
 import com.github.handioq.shopapp.utils.Constants;
 import com.github.handioq.shopapp.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;

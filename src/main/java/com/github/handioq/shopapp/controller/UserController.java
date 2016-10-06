@@ -2,6 +2,7 @@ package com.github.handioq.shopapp.controller;
 
 import com.github.handioq.shopapp.model.entity.User;
 import com.github.handioq.shopapp.service.UserService;
+import com.github.handioq.shopapp.service.impl.UserServiceImpl;
 import com.github.handioq.shopapp.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,27 +1,13 @@
 package com.github.handioq.shopapp.service;
 
 import com.github.handioq.shopapp.model.entity.User;
-import com.github.handioq.shopapp.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@Transactional
-public class UserService {
+public interface UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    User findByUsername(String name);
 
-    public User findByUsername(String name) {
-        return userRepository.findByUsername(name);
-    }
+    User findByEmail(String email);
 
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+    User findOne(long id);
 
-    public User findOne(long id) {
-        return userRepository.findOne(id);
-    }
 }
