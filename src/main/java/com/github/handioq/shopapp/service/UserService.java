@@ -17,14 +17,6 @@ public class UserService {
         return userRepository.findByUsername(name);
     }
 
-    public void save(User user) {
-        userRepository.save(user);
-    }
-
-    public void delete(User user) {
-        userRepository.delete(user);
-    }
-
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
