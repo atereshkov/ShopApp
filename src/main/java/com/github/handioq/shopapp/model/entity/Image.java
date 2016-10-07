@@ -1,5 +1,8 @@
 package com.github.handioq.shopapp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -19,7 +22,11 @@ public class Image {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
+    @JsonBackReference
     private Product product;
+
+    public Image() {
+    }
 
     public Image(String imageUrl) {
         this.imageUrl = imageUrl;
