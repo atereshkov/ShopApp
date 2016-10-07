@@ -143,7 +143,6 @@ public class User implements Serializable {
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         return roles != null ? roles.equals(user.roles) : user.roles == null;
-
     }
 
     @Override
@@ -153,8 +152,6 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", enabled=" + enabled +
-                ", roles=" + roles +
                 '}';
     }
 }
