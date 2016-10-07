@@ -22,8 +22,8 @@ public class Role implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles") // cascade = {CascadeType.MERGE, CascadeType.PERSIST}
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Set<User> users = new HashSet<User>();
 
     public Role(String name) {

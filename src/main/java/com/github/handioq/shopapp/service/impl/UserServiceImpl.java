@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -27,5 +30,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findOne(long id) {
         return userRepository.findOne(id);
+    }
+
+    @Override
+    public void delete(long id) {
+        userRepository.delete(id);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }
