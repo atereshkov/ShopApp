@@ -1,6 +1,7 @@
 package com.github.handioq.shopapp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -40,6 +41,7 @@ public class Image {
         this.id = id;
     }
 
+    @JsonProperty("image_url")
     public String getImageUrl() {
         return imageUrl;
     }

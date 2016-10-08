@@ -4,11 +4,11 @@ import com.github.handioq.shopapp.model.entity.Product;
 import com.github.handioq.shopapp.service.ProductService;
 import com.github.handioq.shopapp.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(Constants.API_URL + Constants.URL_CATALOG)
@@ -29,14 +29,10 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> getProducts() {
-        List<Product> products = productService.findAll();
+    public ResponseEntity<?> getProducts(Pageable pageable) {
+        Page<Product> productPage = productService.findAllByPage(pageable);
 
-        if (products.isEmpty()) {
-            return new ResponseEntity<>("Empty", HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(products, HttpStatus.OK);
+        return new ResponseEntity<>(productPage, HttpStatus.OK);
     }
 
 }

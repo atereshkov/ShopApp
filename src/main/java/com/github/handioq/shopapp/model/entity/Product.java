@@ -1,6 +1,7 @@
 package com.github.handioq.shopapp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -95,6 +96,7 @@ public class Product {
         this.price = price;
     }
 
+    @JsonProperty("main_image")
     public String getMainImage() {
         return mainImage;
     }
