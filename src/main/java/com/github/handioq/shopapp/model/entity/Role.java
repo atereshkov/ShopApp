@@ -1,11 +1,18 @@
-package com.github.handioq.shopapp.model;
+package com.github.handioq.shopapp.model.entity;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,7 +22,16 @@ public class Role {
     @Column(name = "name")
     private String name;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles") // cascade = {CascadeType.MERGE, CascadeType.PERSIST}
+    @JsonIgnore
+    private Set<User> users = new HashSet<User>();
+
     public Role(String name) {
+        this.name = name;
+    }
+
+    public Role(long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -36,13 +52,5 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }
