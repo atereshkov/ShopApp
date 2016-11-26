@@ -24,3 +24,20 @@ mvn clean package spring-boot:run
 ## Spring Security and OAuth2
 
 You can find more information about Spring Security and OAuth2 integration by [following this link](https://github.com/handioq/spring-boot-security-oauth2/).
+
+## REST API
+
+<b>Auth</b>
+
+* POST /api/v1/auth/register register user
+
+<b>User</b>
+
+* GET /api/v1/users/id - get user by id
+* DELETE /api/v1/users/id - delete user by id
+* GET /api/v1/users - get users
+
+<b>Catalog</b>
+
+* GET /api/v1/catalog/id - get product by id
+* GET /api/v1/catalog?page=2&limit=20 - get products with pagination
