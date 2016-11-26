@@ -29,15 +29,16 @@ You can find more information about Spring Security and OAuth2 integration by [f
 
 <b>Auth</b>
 
-* POST /api/v1/auth/register register user
+* [About OAuth 2.0 token based requests in this project you can read there](https://github.com/handioq/spring-boot-security-oauth2#how-to-use)
+* POST /api/v1/auth/register - Register user
 
 <b>User</b>
 
-* GET /api/v1/users/id - get user by id
-* DELETE /api/v1/users/id - delete user by id
-* GET /api/v1/users - get users
+* GET /api/v1/users/id - Get user by id
+* DELETE /api/v1/users/id - Delete user by id
+* GET /api/v1/users - Get users
 
 <b>Catalog</b>
 
-* GET /api/v1/catalog/id - get product by id
-* GET /api/v1/catalog?page=2&limit=20 - get products with pagination
+* GET /api/v1/catalog/id - Get product by id
+* GET /api/v1/catalog?page=2&limit=20 - Get products with pagination
